@@ -1,24 +1,56 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+|--------------------|--------|-------------|
+| nickname           | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| password           | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birthday           | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many : items
+- has_many : buys
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column             | Type       | Options     |
+|--------------------|------------|-------------|
+| user               | references | null: false, foreign_key: true |
+| name               | string     | null: false |
+| explanation        | text       | null: false |
+| category           | string     | null: false |
+| item_status        | string     | null: false |
+| shipping_cost      | integer    | null: false |
+| shipping_source    | string     | null: false |
+| shipping_date      | date       | null: false |
+| price              | integer    | null: false |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to : user
+- belongs_to : buy
 
-* Services (job queues, cache servers, search engines, etc.)
+## buys テーブル
 
-* Deployment instructions
+| Column             | Type       | Options     |
+|--------------------|------------|-------------|
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
+| postcode           | string     | null: false |
+| prefecture         | string     | null: false |
+| city               | string     | null: false |
+| block              | string     | null: false |
+| building           | string     |             |
+| phone_number       | string     | null: false |
 
-* ...
+### Association
+
+- belongs_to : user
+- belongs_to : item
