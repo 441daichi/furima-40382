@@ -16,7 +16,6 @@
 ### Association
 
 - has_many : items
-- has_many : buys
 - has_many : orders
 
 ## items テーブル
@@ -29,14 +28,13 @@
 | category_id        | integer    | null: false |
 | item_status_id     | integer    | null: false |
 | shipping_cost_id   | integer    | null: false |
-| shipping_source_id | integer    | null: false |
+| prefecture_id      | integer    | null: false |
 | shipping_date_id   | integer    | null: false |
 | price              | integer    | null: false |
 
 ### Association
 
 - belongs_to : user
-- has_one : buy
 - has_one : order
 
 ## orders テーブル
@@ -58,7 +56,7 @@
 |--------------------|------------|-------------|
 | order              | references | null: false, foreign_key: true |
 | postcode           | string     | null: false |
-| prefecture         | string     | null: false |
+| prefecture_id      | integer     | null: false |
 | city               | string     | null: false |
 | block              | string     | null: false |
 | building           | string     |             |
