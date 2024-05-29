@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  belongs_to :user
+
   belongs_to :category
   belongs_to :prefecture
   belongs_to :item_status
@@ -9,14 +11,15 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  validates :image, prisence: true do
-  validates :name, prisence: true do
-  validates :explanation, prisence: true do
-  validates :category_id, prisence: true do
-  validates :item_status_id, prisence: true do
-  validates :shipping_cost_id, prisence: true do
-  validates :prefecture_id, prisence: true do
-  validates :shipping_date_id, prisence: true do
-  validates :price, prisence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 } do
+  validates :user_id, presence: true
+  validates :image, presence: true
+  validates :name, presence: true
+  validates :explanation, presence: true
+  validates :category_id, presence: true, numericality: { other_than: 0 }
+  validates :item_status_id, presence: true, numericality: { other_than: 0 }
+  validates :shipping_cost_id, presence: true, numericality: { other_than: 0 }
+  validates :prefecture_id, presence: true, numericality: { other_than: 0 }
+  validates :shipping_date_id, presence: true, numericality: { other_than: 0 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
 end
