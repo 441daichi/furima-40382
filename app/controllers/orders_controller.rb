@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
+    @order_form = OrderForm.new(order_params)
+    @order_form.save
   end
 
   private
@@ -14,5 +15,5 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order_form).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
-  
+
 end
