@@ -23,6 +23,7 @@ const pay = () => {
       numberElement.clear();
       expiryElement.clear();
       cvcElement.clear();
+      document.getElementById("charge-form").submit();
     });
     e.preventDefault();
   });
