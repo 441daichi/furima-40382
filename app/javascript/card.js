@@ -1,5 +1,5 @@
 const pay = () => {
-  const publickey = gon.public_key
+  const publicKey = gon.public_key
   const payjp = Payjp(publicKey)
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
@@ -12,11 +12,10 @@ const pay = () => {
 
   const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) => {
-  payjp.createToken(numberElement).then(function (response) {
+    payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
       } else {
         const token = response.id;
-        console.log(token)
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
