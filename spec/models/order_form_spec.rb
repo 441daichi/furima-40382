@@ -4,7 +4,7 @@ RSpec.describe OrderForm, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @order_form = FactoryBot.build(:order_form)
+    @order_form = FactoryBot.build(:order_form, user_id: @user, item_id: @item)
   end
 
   describe '配送先情報の保存' do
@@ -88,6 +88,16 @@ RSpec.describe OrderForm, type: :model do
         @order_form.token = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では保存できない' do
+        @order_form.user_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では保存できない' do
+        @order_form.item_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
