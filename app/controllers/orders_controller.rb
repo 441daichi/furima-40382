@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @item = Item.find(params[:item_id])
     @order_form = OrderForm.new
-    if @item.sold_out?
+    if @item.sold_out? || user_signed_in? && current_user.id == @item.user_id
       redirect_to root_path
     end
   end
